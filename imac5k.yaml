@@ -1,3 +1,23 @@
 #cloud-config
+coreos:
+  etcd2:
+    discovery: "https://discovery.etcd.io/9af2de0379e51be5b1233a9c1e4db58e"
+    advertise-client-urls: "http://$public_ipv4:2379"
+    initial-advertise-peer-urls: "http://$private_ipv4:2380"
+    listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
+    listen-peer-urls: "http://$private_ipv4:2380,http://$private_ipv4:7001"
+  fleet:
+    public-ip: "$public_ipv4"
+    metadata: "region=us-west"
+  flannel:
+    etcd_prefix: "/coreos.com/network2"
+  locksmith:
+    endpoint: "http://example.com:2379"
+  update:
+    reboot-strategy: "best-effort"
+
 ssh_authorized_keys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEptTGqq/6NdwkciSzDG3bVy65JRGIJ9bOFthA7e4iAcwR0W311k7LQKosVWHZ/sGlet3bw44fnNeCf98rT7ynLCqCWBU5b5thDV3uB4ZxHpL2VAbJnEnegX34jS7L94gj/YJaaS6ximYcyqIKilQoDVnkI/5zWJP4CMaMS6FWT+ZM3yUEgwgF76wh9EIlOs4xELSJrMIsbBD6YQr3jnj0FuNA+TSqC8Q9GpxTWhPnzWwhZVmRfIL2DSVjT4kH2xE7Mp96Gn2zxKidX0sEd73bP+NKPvVTKYDtbmqrBZS+cA5D/wdvXk90oaStUtkP+zxXVqIU+KNaQQhP6dBLXxn2BDbiWYXb5DCde8/4KDHirzDzCNYoL7brz0qDcGfxoOn5jKmhYueZLH9Q88mc8IF6I/L9rY37uqQyPYpxm/huYqhXi8+Ju8NwRV6rXHIgYIA4XfJUtoqkKlaDy7O1d65ESNBK8xj12cmB2k6zZuQfgEmvr+kJY+c/2pbLxRg6cPMzhx5MRC0BJaRGdKUoeUOv5XLbntEVZZbiC4QtuHhoib72KHcW0Jenl8T6Q87+vpwNL0dXO/4vSc6MMqHq0jv7HXqtZ1GYEvFv0iwIaoQiIAL2E9vqViFrU14vSd9h3mSSBHdq7/2ckvCFXYOBMCruHUNhxNlcjIFFHs7zfhUsSw== yi.wang.2005@gmail.com
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCrSANoKR3E3zM+rbbYmloevzKQBkleUlGsWCm3P4CFWzuhevb+pGBCAhSp4qMSVm8jnb5o0A5Vo6x213+Mo2q34F0Oq+4MDmPcwop2jB8SalBUXG+KmIgQYy08KsZz7XgMRzWUPDddgTRe0Y8rdyE3iHGyjhepJ9pjfXXOSP8CNIZlWFqjjak73AMtODs5FwuSxnbgc/ckbWpHZzDkxhqQY9mNhPk2LjdWPCmb51Lfz3chFMUvAjkdJ1hbNhZrToPmmYh2SkMBZpJZl5mxPyvUKHsgaIiNLIL/1loNhe4QXLi90lmtUPyyXXLHlKQBSS+ZCA3JBrZgOOD4imaJMHq/8eBQItU7hgSEbTfaZQA+rZO+K4yf/LBfKJVMuKcMxHQswwdfJJdLbyhS9Nea4MkCTTeVrL1/mVdJl/aIh7GxvO5M97p+Y1UmbysvXV1Y3omVPXiUx+5deAhquLR7kkXcsf8wNsGZtNZkKY7eYNbv0UkMv7w/q7v/Nf5Z++b6HTYnzhSUVO+StS0WDXaaGiJG89j7jAeclB9l7k7/1gm8H0yRBsvUdNpKk4htJp6pVMzgUnvmX8sevqfQNoeS7utsEdoxV2avUy28thmiilDhW275J0+e33UAsOotS42p74m67rn6dsZ2kX2iqdrA8tzBbW39bJrYQQCNR4bMa43zOw== yiwang01@baidu.com
+
+hostname: yinv
